@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_midium_project/components/post_detail.dart';
+import 'package:flutter_midium_project/pages/post/post_view.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -51,7 +51,7 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ),
-          PostDetail(),
+          PostView(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -64,6 +64,7 @@ class _MainPageState extends State<MainPage> {
         onTap: (index) {
           setState(() {});
         },
+
         items: [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
@@ -82,6 +83,14 @@ class _MainPageState extends State<MainPage> {
             label: " ",
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.green,
+        child: Icon(
+          CupertinoIcons.plus_circle,
+          color: Colors.white,
+        ),
       ),
     );
   }

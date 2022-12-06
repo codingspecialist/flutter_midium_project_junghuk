@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_midium_project/pages/home_page.dart';
 import 'package:flutter_midium_project/pages/main_page.dart';
 
 void main() {
