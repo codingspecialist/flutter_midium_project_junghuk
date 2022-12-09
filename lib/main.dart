@@ -1,6 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_midium_project/pages/home_page.dart';
+import 'package:flutter_midium_project/components/post/post_text_view.dart';
+import 'package:flutter_midium_project/components/post/post_view.dart';
+import 'package:flutter_midium_project/components/post/text_page.dart';
+import 'package:flutter_midium_project/pages/explore_page.dart';
+import 'package:flutter_midium_project/home_page.dart';
+import 'package:flutter_midium_project/pages/join_page.dart';
+import 'package:flutter_midium_project/pages/login_page.dart';
 import 'package:flutter_midium_project/pages/main_page.dart';
+import 'package:flutter_midium_project/pages/profile_page.dart';
+import 'package:flutter_midium_project/pages/your_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +33,7 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(color: Colors.black),
         ),
       ),
-      home: MainPage(),
+      home: YourPage(),
     );
   }
 }
