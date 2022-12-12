@@ -1,28 +1,41 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_midium_project/components/post/post_text_view.dart';
+import 'package:flutter_midium_project/components/post/post_view.dart';
 
-class ExplorePage extends StatelessWidget {
+class ExplorePage extends StatefulWidget {
   const ExplorePage({Key? key}) : super(key: key);
 
   @override
+  _TabPageState createState() => _TabPageState();
+}
+
+class _TabPageState extends State<ExplorePage> with TickerProviderStateMixin {
+  late TabController _tabController;
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    _tabController = TabController(
+      length: 1,
+      vsync: this, //vsync에 this 형태로 전달해야 애니메이션이 정상 처리됨
+    );
+    super.initState();
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    int _selectedIndex = 0;
     return Scaffold(
-      appBar: _buildAppBar(context),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: [
-          ListView(
-            children: [
-              PostTextView(),
-              PostTextView(),
-              PostTextView(),
-              PostTextView(),
-            ],
-          ),
-        ],
-      ),
+      appBar: _buildAppBar(),
+      body: (SizedBox(
+        width: 5,
+        height: 5,
+      )),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -30,6 +43,7 @@ class ExplorePage extends StatelessWidget {
         backgroundColor: Colors.black,
         selectedItemColor: Colors.grey,
         unselectedItemColor: Colors.black54,
+
         items: [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
@@ -48,8 +62,8 @@ class ExplorePage extends StatelessWidget {
             label: " ",
           ),
         ],
-        // currentIndex: _selectedIndex,
-        // onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -66,53 +80,20 @@ class ExplorePage extends StatelessWidget {
       ),
     );
   }
-
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      title: const Text("Explorer"),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () {
-            // showSearch(
-            //   context: context,
-            //   delegate: MySearchDelegate(),
-            // );
-          },
-        ),
-      ],
-    );
-  }
 }
 
-// class MySearchDelegate extends SearchDelegate {
-//   @override
-//   Widget? buildLeading(BuildContext context) => IconButton(
-//         onPressed: () => close(context, null),
-//         icon: const Icon(Icons.arrow_back),
-//       );
-//
-//   @override
-//   List<Widget>? buildActions(BuildContext context) => [
-//         IconButton(
-//           onPressed: () {
-//             if (query.isEmpty) {
-//               close(context, null);
-//             } else {
-//               query = ' ';
-//             }
-//           },
-//           icon: const Icon(Icons.clear),
-//         )
-//       ];
-//
-//   @override
-//   Widget buildResults(BuildContext context) {
-//     throw SizedBox();
-//   }
-//
-//   @override
-//   Widget buildSuggestions(BuildContext context) {
-//     throw SizedBox();
-//   }
-// }
+AppBar _buildAppBar() {
+  return AppBar(
+    title: Text("Explore"),
+    actions: [
+      IconButton(
+        icon: Icon(
+          CupertinoIcons.bell,
+          size: 23,
+          color: Colors.white,
+        ),
+        onPressed: () {},
+      ),
+    ],
+  );
+}

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/components/join_custom_form.dart';
 import 'package:flutter_midium_project/models/size.dart';
@@ -8,12 +9,11 @@ class JoinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _buildAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            SizedBox(height: xlarge_gap),
-            SizedBox(height: large_gap),
             JoinCustomForm(),
           ],
         ),
@@ -21,4 +21,20 @@ class JoinPage extends StatelessWidget {
       backgroundColor: Colors.white,
     );
   }
+}
+
+AppBar _buildAppBar() {
+  return AppBar(
+    title: Text("Join"),
+    actions: [
+      IconButton(
+        icon: Icon(
+          CupertinoIcons.back,
+          size: 23,
+          color: Colors.white,
+        ),
+        onPressed: () {},
+      ),
+    ],
+  );
 }

@@ -11,9 +11,15 @@ class PostView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "프로필 ------ 이르으으으으음",
-            style: TextStyle(color: Colors.white),
+          Row(
+            children: [
+              Image(
+                image: AssetImage('assets/images/cat2.jpg'),
+                width: 40,
+                height: 20,
+              ),
+              Text(" 닉네임", style: TextStyle(color: Colors.white)),
+            ],
           ),
           Column(
             children: [
@@ -34,18 +40,26 @@ class PostView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Image.asset(
-                    "assets/images/cat1.jpg",
-                    width: 90,
-                    height: 70,
-                    fit: BoxFit.cover,
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/images/cat1.jpg",
+                          width: 90,
+                          height: 70,
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(height: 5),
+                        Icon(
+                          CupertinoIcons.bell,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              Icon(
-                CupertinoIcons.bell,
-                color: Colors.white,
               ),
             ],
           ),

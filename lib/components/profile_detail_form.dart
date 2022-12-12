@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/components/custom_text_form_field.dart';
 import 'package:flutter_midium_project/models/size.dart';
 
-class JoinCustomForm extends StatelessWidget {
+class ProfileDetailForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -13,6 +13,7 @@ class JoinCustomForm extends StatelessWidget {
         key: _formKey,
         child: Column(
           children: [
+            SizedBox(height: medium_gap),
             CustomTextFormField("ID"),
             SizedBox(height: medium_gap),
             CustomTextFormField("Password"),
@@ -27,7 +28,7 @@ class JoinCustomForm extends StatelessWidget {
                   Navigator.pushNamed(context, "/home");
                 }
               },
-              child: Text("Join"),
+              child: Text("Save"),
             ),
           ],
         ),

@@ -1,22 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_midium_project/components/custom_form.dart';
+import 'package:flutter_midium_project/components/profile_detail_form.dart';
 import 'package:flutter_midium_project/models/size.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class ProfileDetailPage extends StatelessWidget {
+  const ProfileDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            CustomForm(),
-          ],
-        ),
+      body: ListView(
+        children: [
+          SizedBox(),
+          ProfileDetailForm(),
+          SizedBox(),
+        ],
       ),
       backgroundColor: Colors.white,
     );
@@ -25,7 +24,7 @@ class LoginPage extends StatelessWidget {
 
 AppBar _buildAppBar() {
   return AppBar(
-    title: Text("Login"),
+    title: Text("Profile Detail"),
     actions: [
       IconButton(
         icon: Icon(

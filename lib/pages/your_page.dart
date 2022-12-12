@@ -33,7 +33,7 @@ class _TabPageState extends State<YourPage> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'YourPage',
+          'Your library',
         ),
       ),
       body: Column(
