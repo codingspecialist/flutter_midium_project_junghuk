@@ -13,10 +13,9 @@ class PostView extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image(
-                image: AssetImage('assets/images/cat2.jpg'),
-                width: 40,
-                height: 20,
+              CircleAvatar(
+                radius: 16,
+                backgroundImage: NetworkImage(""),
               ),
               Text(" 닉네임", style: TextStyle(color: Colors.white)),
             ],

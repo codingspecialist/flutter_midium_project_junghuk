@@ -2,21 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/components/post/post_view.dart';
 
-class ExplorePage extends StatefulWidget {
-  const ExplorePage({Key? key}) : super(key: key);
+class ExplorerPage extends StatefulWidget {
+  const ExplorerPage({Key? key}) : super(key: key);
 
   @override
-  _TabPageState createState() => _TabPageState();
+  _ExplorerPage createState() => _ExplorerPage();
 }
 
-class _TabPageState extends State<ExplorePage> with TickerProviderStateMixin {
+class _ExplorerPage extends State<ExplorerPage> with TickerProviderStateMixin {
   late TabController _tabController;
   int _selectedIndex = 0;
 
   @override
   void initState() {
     _tabController = TabController(
-      length: 1,
+      length: 2,
       vsync: this, //vsync에 this 형태로 전달해야 애니메이션이 정상 처리됨
     );
     super.initState();
@@ -31,11 +31,58 @@ class _TabPageState extends State<ExplorePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      body: (SizedBox(
-        width: 5,
-        height: 5,
-      )),
+      appBar: AppBar(
+        title: Text(
+          'Explorer',
+        ),
+      ),
+      body: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.black,
+              border: Border.all(),
+            ),
+            child: TabBar(
+              tabs: [
+                Container(
+                  height: 40,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'daily',
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'public',
+                  ),
+                ),
+              ],
+              indicator: BoxDecoration(),
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.white,
+              controller: _tabController,
+            ),
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                Container(
+                  color: Colors.black,
+                  child: (PostView()),
+                ),
+                Container(
+                  color: Colors.black,
+                  child: (PostView()),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -84,7 +131,7 @@ class _TabPageState extends State<ExplorePage> with TickerProviderStateMixin {
 
 AppBar _buildAppBar() {
   return AppBar(
-    title: Text("Explore"),
+    title: Text("Explorer"),
     actions: [
       IconButton(
         icon: Icon(

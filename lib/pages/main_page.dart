@@ -86,11 +86,9 @@ class _TabPageState extends State<MainPage> with TickerProviderStateMixin {
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        // currentIndex: (),
         backgroundColor: Colors.black,
         selectedItemColor: Colors.grey,
         unselectedItemColor: Colors.black54,
-
         items: [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),

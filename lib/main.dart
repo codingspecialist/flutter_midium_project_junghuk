@@ -11,6 +11,7 @@ import 'package:flutter_midium_project/pages/login_page.dart';
 import 'package:flutter_midium_project/pages/main_page.dart';
 import 'package:flutter_midium_project/pages/profile_detail_page.dart';
 import 'package:flutter_midium_project/pages/profile_page.dart';
+import 'package:flutter_midium_project/pages/setting_page.dart';
 import 'package:flutter_midium_project/pages/your_page.dart';
 
 void main() {
