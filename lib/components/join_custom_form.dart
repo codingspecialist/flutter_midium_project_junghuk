@@ -21,13 +21,12 @@ class JoinCustomForm extends StatelessWidget {
             SizedBox(height: medium_gap),
             CustomTextFormField("Name"),
             SizedBox(height: medium_gap),
-            TextButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, "/home");
-                }
-              },
-              child: Text("Join"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("Join", style: TextStyle(color: Colors.blueAccent)),
+                Text("ID / PassWord", style: TextStyle(color: Colors.blueAccent)),
+              ],
             ),
           ],
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/components/post/post_text_view.dart';
 import 'package:flutter_midium_project/components/post/post_view.dart';
+import 'package:flutter_midium_project/components/post/text_detail_page.dart';
 import 'package:flutter_midium_project/components/post/text_page.dart';
 import 'package:flutter_midium_project/home_page.dart';
 import 'package:flutter_midium_project/pages/explore_page.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(color: Colors.black),
         ),
       ),
-      home: YourPage(),
+      home: PostTextView(),
     );
   }
 }
