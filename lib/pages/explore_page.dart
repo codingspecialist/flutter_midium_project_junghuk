@@ -50,13 +50,23 @@ class _ExplorerPage extends State<ExplorerPage> with TickerProviderStateMixin {
         ],
       ),
       backgroundColor: Colors.black,
-      body: ListView(
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         padding: const EdgeInsets.all(8),
-        children: <Widget>[
-          PostTextView(),
-          PostTextView(),
-          PostTextView(),
-        ],
+        child: Column(
+          children: [
+            PostTextView(),
+            PostTextView(),
+            PostTextView(),
+            PostTextView(),
+            PostTextView(),
+            PostTextView(),
+            PostTextView(),
+            PostTextView(),
+            PostTextView(),
+            PostTextView(),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
