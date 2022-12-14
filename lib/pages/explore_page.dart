@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_midium_project/components/post/post_text_view.dart';
 import 'package:flutter_midium_project/components/post/post_view.dart';
 
 class ExplorerPage extends StatefulWidget {
@@ -32,65 +33,38 @@ class _ExplorerPage extends State<ExplorerPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Explorer',
-        ),
+        title: Text("Explorer"),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: MySearchDelegate(),
+              );
+            },
+          ),
+        ],
       ),
-      body: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              border: Border.all(),
-            ),
-            child: TabBar(
-              tabs: [
-                Container(
-                  height: 40,
-                  alignment: Alignment.center,
-                  child: Text(
-                    'daily',
-                  ),
-                ),
-                Container(
-                  height: 40,
-                  alignment: Alignment.center,
-                  child: Text(
-                    'public',
-                  ),
-                ),
-              ],
-              indicator: BoxDecoration(),
-              labelColor: Colors.white,
-              unselectedLabelColor: Colors.white,
-              controller: _tabController,
-            ),
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                Container(
-                  color: Colors.black,
-                  child: (PostView()),
-                ),
-                Container(
-                  color: Colors.black,
-                  child: (PostView()),
-                ),
-              ],
-            ),
-          ),
+      backgroundColor: Colors.black,
+      body: ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          PostTextView(),
+          PostTextView(),
+          PostTextView(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        // currentIndex: (),
+        type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.black,
-        selectedItemColor: Colors.grey,
-        unselectedItemColor: Colors.black54,
-
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white38,
         items: [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
@@ -121,7 +95,7 @@ class _ExplorerPage extends State<ExplorerPage> with TickerProviderStateMixin {
         },
         backgroundColor: Colors.green,
         child: Icon(
-          CupertinoIcons.plus_circle,
+          CupertinoIcons.plus,
           color: Colors.white,
         ),
       ),
@@ -129,18 +103,63 @@ class _ExplorerPage extends State<ExplorerPage> with TickerProviderStateMixin {
   }
 }
 
-AppBar _buildAppBar() {
-  return AppBar(
-    title: Text("Explorer"),
-    actions: [
-      IconButton(
-        icon: Icon(
-          CupertinoIcons.bell,
-          size: 23,
-          color: Colors.white,
+class MySearchDelegate extends SearchDelegate {
+  List<String> searchResults = [
+    'Brazil',
+    'China',
+    'India',
+    'Russia',
+    'USA',
+  ];
+
+  @override
+  Widget buildLeading(BuildContext context) => IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () => close(context, null),
+      );
+
+  @override
+  List<Widget> buildActions(BuildContext context) => [
+        IconButton(
+          icon: const Icon(Icons.clear),
+          onPressed: () {
+            if (query.isEmpty) {
+              close(context, null);
+            } else {
+              query = ' ';
+            }
+          },
+        )
+      ];
+  @override
+  Widget buildResults(BuildContext context) => Center(
+        child: Text(
+          query,
+          style: const TextStyle(fontSize: 64, fontWeight: FontWeight.bold),
         ),
-        onPressed: () {},
-      ),
-    ],
-  );
+      );
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> suggestions = searchResults.where((searchResult) {
+      final result = searchResult.toLowerCase();
+      final input = query.toLowerCase();
+
+      return result.contains(input);
+    }).toList();
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        final suggestion = suggestions[index];
+        return ListTile(
+          title: Text(suggestion),
+          onTap: () {
+            query = suggestion;
+
+            showResults(context);
+          },
+        );
+      },
+    );
+  }
 }

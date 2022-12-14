@@ -16,22 +16,20 @@ class SettingPage extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(width: 10),
-            Text(
-              "Logout",
-              style: TextStyle(
-                color: Colors.white60,
-              ),
+            TextButton(
+              onPressed: () {},
+              child: Text("Logout"),
             ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        backgroundColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white38,
         items: [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),

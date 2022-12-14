@@ -12,13 +12,19 @@ class TextDetailPage extends StatelessWidget {
           child: (Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "finish",
-                style: TextStyle(color: Colors.blueAccent),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Save",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-              Text(
-                "Save",
-                style: TextStyle(color: Colors.blueAccent),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Exit",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           )),
@@ -33,10 +39,11 @@ class TextDetailPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
-                // inputFormatters: [FilteringTextInputFormatter.allow(('[ㄱ-ㅎ|가-힣|ㆍ|ᆢ'))],
-                maxLines: 10,
                 style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(),
+                decoration: InputDecoration(
+                  labelText: 'Write',
+                  labelStyle: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],

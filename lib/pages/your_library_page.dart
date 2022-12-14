@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/components/post/post_view.dart';
 
-class YourPage extends StatefulWidget {
-  const YourPage({Key? key}) : super(key: key);
+class YourLibrayPage extends StatefulWidget {
+  const YourLibrayPage({Key? key}) : super(key: key);
 
   @override
   _TabPageState createState() => _TabPageState();
 }
 
-class _TabPageState extends State<YourPage> with TickerProviderStateMixin {
+class _TabPageState extends State<YourLibrayPage> with TickerProviderStateMixin {
   late TabController _tabController;
   int _selectedIndex = 0;
 
@@ -41,7 +41,9 @@ class _TabPageState extends State<YourPage> with TickerProviderStateMixin {
           Container(
             decoration: BoxDecoration(
               color: Colors.black,
-              border: Border.all(),
+              border: Border(
+                bottom: BorderSide(color: Colors.white30, width: 2),
+              ),
             ),
             child: TabBar(
               tabs: [
@@ -49,14 +51,15 @@ class _TabPageState extends State<YourPage> with TickerProviderStateMixin {
                   height: 40,
                   alignment: Alignment.center,
                   child: Text(
-                    'Saved',
+                    'Saved ( 좋아요 누른 것 )',
                   ),
                 ),
                 Container(
                   height: 40,
                   alignment: Alignment.center,
                   child: Text(
-                    'Recently viewd',
+                    'Recently viewd                          ( 내가 읽은 페이지 )',
+                    maxLines: 2,
                   ),
                 ),
               ],
@@ -87,9 +90,10 @@ class _TabPageState extends State<YourPage> with TickerProviderStateMixin {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         // currentIndex: (),
+        type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.black,
-        selectedItemColor: Colors.grey,
-        unselectedItemColor: Colors.black54,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white38,
 
         items: [
           BottomNavigationBarItem(
@@ -121,7 +125,7 @@ class _TabPageState extends State<YourPage> with TickerProviderStateMixin {
         },
         backgroundColor: Colors.green,
         child: Icon(
-          CupertinoIcons.plus_circle,
+          CupertinoIcons.plus,
           color: Colors.white,
         ),
       ),

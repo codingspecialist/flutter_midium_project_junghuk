@@ -86,13 +86,19 @@ class _TabPageState extends State<MainPage> with TickerProviderStateMixin {
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.black,
-        selectedItemColor: Colors.grey,
-        unselectedItemColor: Colors.black54,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white38,
+        onTap: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
         items: [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
-            label: " ",
+            label: " 1111",
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.search),
@@ -107,8 +113,6 @@ class _TabPageState extends State<MainPage> with TickerProviderStateMixin {
             label: " ",
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -119,7 +123,7 @@ class _TabPageState extends State<MainPage> with TickerProviderStateMixin {
         },
         backgroundColor: Colors.green,
         child: Icon(
-          CupertinoIcons.plus_circle,
+          CupertinoIcons.plus,
           color: Colors.white,
         ),
       ),
