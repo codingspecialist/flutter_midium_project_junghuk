@@ -8,7 +8,7 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white10,
       body: Container(
         width: double.infinity,
         height: 40,

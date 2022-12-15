@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class TextPage extends StatelessWidget {
-  const TextPage({Key? key}) : super(key: key);
+class PostWritePage extends StatelessWidget {
+  const PostWritePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

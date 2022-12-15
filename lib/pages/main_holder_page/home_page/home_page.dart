@@ -1,0 +1,118 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_midium_project/components/custom_post_view.dart';
+import 'package:flutter_midium_project/components/custom_widget.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _TabPageState createState() => _TabPageState();
+}
+
+class _TabPageState extends State<HomePage> with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(
+      length: 2,
+      vsync: this, //vsync에 this 형태로 전달해야 애니메이션이 정상 처리됨
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: _buildAppBar(),
+        body: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [],
+                ),
+              ),
+            ];
+          },
+          body: _buildTab(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTab() {
+    return Column(
+      children: [
+        _buildTabBar(),
+        customDivider(),
+        Expanded(child: _buildTabBarView()),
+      ],
+    );
+  }
+
+  Widget _buildTabBarView() {
+    return TabBarView(
+      controller: _tabController,
+      children: [
+        ListView.separated(
+            itemBuilder: (context, index) {
+              return CustomPostView();
+            },
+            separatorBuilder: (context, index) => Divider(height: 5),
+            itemCount: 10),
+        ListView.separated(
+            itemBuilder: (context, index) {
+              return CustomPostView();
+            },
+            separatorBuilder: (context, index) => Divider(height: 5),
+            itemCount: 10),
+      ],
+    );
+  }
+
+  Widget _buildTabBar() {
+    return TabBar(
+      tabs: [
+        Container(
+          height: 40,
+          alignment: Alignment.center,
+          child: Text(
+            'Daily',
+          ),
+        ),
+        Container(
+          height: 40,
+          alignment: Alignment.center,
+          child: Text(
+            'business',
+          ),
+        ),
+      ],
+      indicator: BoxDecoration(),
+      labelColor: Colors.white,
+      unselectedLabelColor: Colors.white,
+      controller: _tabController,
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: Text("Home"),
+      actions: [
+        IconButton(
+          icon: Icon(
+            CupertinoIcons.settings_solid,
+            size: 22,
+            color: Colors.white,
+          ),
+          onPressed: () {},
+        ),
+      ],
+      automaticallyImplyLeading: false,
+    );
+  }
+}
