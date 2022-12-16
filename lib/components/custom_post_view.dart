@@ -21,7 +21,12 @@ class CustomPostView extends StatelessWidget {
                   backgroundImage: AssetImage("assets/images/cat1.jpg"),
                 ),
                 SizedBox(width: 8),
-                Text(" 닉네임", style: TextStyle(color: Colors.white)),
+                Text(" 닉네임",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                    )),
               ],
             ),
             Row(
@@ -31,8 +36,11 @@ class CustomPostView extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "야오옹야오옹야오옹야오옹야오옹야오옹야오옹야오옹야오옹야오옹야오옹야오옹",
-                        style: TextStyle(color: Colors.white),
+                        "야오옹야오 옹야오옹야오옹야오 옹야오옹야오옹야오 옹야오옹야오옹 야오옹야오옹",
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontStyle: FontStyle.italic),
                       ),
                     ],
                   ),

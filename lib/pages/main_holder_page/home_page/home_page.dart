@@ -26,7 +26,7 @@ class _TabPageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: mainHolderAppBar(context, "Home"),
+      appBar: mainHolderAppBar(context, "홈"),
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -75,14 +75,16 @@ class _TabPageState extends State<HomePage> with TickerProviderStateMixin {
           height: 40,
           alignment: Alignment.center,
           child: Text(
-            'Daily',
+            '일상',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
         Container(
           height: 40,
           alignment: Alignment.center,
           child: Text(
-            'business',
+            '업무',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ],

@@ -10,39 +10,13 @@ class YourLibraryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: mainHolderAppBar(context, "Library"),
+      appBar: mainHolderAppBar(context, "북마크"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Container(
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.separated(
-                    itemBuilder: (context, index) => CustomPostTextView(index),
-                    separatorBuilder: (context, index) => const Divider(),
-                    itemCount: 10),
-              ),
-            ],
-          ),
-        ),
+        child: ListView.builder(
+            itemBuilder: (context, index) => CustomPostTextView(index),
+            itemCount: 10),
       ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: Text("Your library"),
-      actions: [
-        IconButton(
-          icon: Icon(
-            CupertinoIcons.settings_solid,
-            size: 22,
-            color: Colors.white,
-          ),
-          onPressed: () {},
-        ),
-      ],
-      automaticallyImplyLeading: false,
     );
   }
 }

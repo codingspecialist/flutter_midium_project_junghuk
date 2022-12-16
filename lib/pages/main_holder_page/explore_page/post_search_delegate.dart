@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PostSearchPage extends SearchDelegate {
+class PostSearchDelegate extends SearchDelegate {
   List<String> searchResults = [
     'Brazil',
     'China',

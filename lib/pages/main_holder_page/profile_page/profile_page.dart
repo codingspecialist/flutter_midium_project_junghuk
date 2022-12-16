@@ -99,15 +99,17 @@ class _TabPageState extends State<ProfilePage> with TickerProviderStateMixin {
         Container(
           height: 40,
           alignment: Alignment.center,
-          child: Text(
-            'Storise',
+          child: const Text(
+            '마이',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
         Container(
           height: 40,
           alignment: Alignment.center,
-          child: Text(
-            'Lists',
+          child: const Text(
+            '방문',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ],

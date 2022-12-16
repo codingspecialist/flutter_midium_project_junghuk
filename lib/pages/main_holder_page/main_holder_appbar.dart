@@ -1,23 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_midium_project/pages/post_search_page/post_search_page.dart';
+import 'package:flutter_midium_project/pages/main_holder_page/explore_page/post_search_delegate.dart';
 
 AppBar mainHolderAppBar(BuildContext context, String title) {
   return AppBar(
     title: Text(title),
     actions: [
-      IconButton(
-        icon: const Icon(
-          Icons.search,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          showSearch(
-            context: context,
-            delegate: PostSearchPage(),
-          );
-        },
-      ),
       const SizedBox(
         width: 8,
       ),
