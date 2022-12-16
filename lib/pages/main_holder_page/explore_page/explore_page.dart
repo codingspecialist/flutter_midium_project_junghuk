@@ -15,7 +15,7 @@ class ExplorePage extends StatelessWidget {
       body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ListView.separated(
-              itemBuilder: (context, index) => CustomPostTextView(),
+              itemBuilder: (context, index) => CustomPostTextView(index),
               separatorBuilder: (context, index) => const Divider(),
               itemCount: 10)),
     );

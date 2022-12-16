@@ -16,7 +16,9 @@ class PostWritePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: CustomPostWriteForm(),
+        child: ListView(
+          children: [CustomPostWriteForm()],
+        ),
       ),
     );
   }

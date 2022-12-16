@@ -3,13 +3,15 @@ import 'package:flutter_midium_project/models/size.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String text;
-  const CustomTextFormField(this.text);
+  final controller;
+  const CustomTextFormField(this.text, {this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: TextFormField(
+        controller: controller,
         validator: (value) => value!.isEmpty ? "Please enter some text" : null,
         obscureText: text == "Password" ? true : false,
         decoration: InputDecoration(

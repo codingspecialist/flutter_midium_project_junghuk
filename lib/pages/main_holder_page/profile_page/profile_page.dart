@@ -73,7 +73,7 @@ class _TabPageState extends State<ProfilePage> with TickerProviderStateMixin {
         ListView.separated(
             itemBuilder: (context, index) {
               return Container(
-                child: (CustomPostTextView()),
+                child: (CustomPostTextView(index)),
               );
             },
             separatorBuilder: (context, index) => Divider(),
@@ -81,7 +81,7 @@ class _TabPageState extends State<ProfilePage> with TickerProviderStateMixin {
         ListView.separated(
             itemBuilder: (context, index) {
               return Container(
-                child: (CustomPostTextView()),
+                child: (CustomPostTextView(index)),
               );
             },
             separatorBuilder: (context, index) => Divider(),

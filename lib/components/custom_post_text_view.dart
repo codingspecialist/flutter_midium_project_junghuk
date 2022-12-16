@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomPostTextView extends StatelessWidget {
-  const CustomPostTextView({Key? key}) : super(key: key);
+  final number;
+  const CustomPostTextView(this.number, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,8 @@ class CustomPostTextView extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 16,
-                    backgroundImage: AssetImage("assets/images/cat1.jpg"),
+                    backgroundImage: NetworkImage(
+                        "https://picsum.photos/id/$number/200/300"),
                   ),
                   SizedBox(width: 10),
                   Text(

@@ -18,7 +18,7 @@ class YourLibraryPage extends StatelessWidget {
             children: [
               Expanded(
                 child: ListView.separated(
-                    itemBuilder: (context, index) => CustomPostTextView(),
+                    itemBuilder: (context, index) => CustomPostTextView(index),
                     separatorBuilder: (context, index) => const Divider(),
                     itemCount: 10),
               ),

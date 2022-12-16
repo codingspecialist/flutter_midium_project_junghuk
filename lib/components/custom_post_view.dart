@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomPostView extends StatelessWidget {
-  const CustomPostView({Key? key}) : super(key: key);
+  final number;
+  const CustomPostView(this.number, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +41,8 @@ class CustomPostView extends StatelessWidget {
                   padding: EdgeInsets.all(4.0),
                   child: Column(
                     children: [
-                      Image.asset(
-                        "assets/images/cat1.jpg",
+                      Image.network(
+                        "https://picsum.photos/id/$number/200/300",
                         width: 100,
                         height: 60,
                         fit: BoxFit.cover,

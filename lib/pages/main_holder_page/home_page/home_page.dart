@@ -51,13 +51,13 @@ class _TabPageState extends State<HomePage> with TickerProviderStateMixin {
       children: [
         ListView.separated(
             itemBuilder: (context, index) {
-              return CustomPostView();
+              return CustomPostView(index);
             },
             separatorBuilder: (context, index) => Divider(height: 5),
             itemCount: 10),
         ListView.separated(
             itemBuilder: (context, index) {
-              return CustomPostView();
+              return CustomPostView(index);
             },
             separatorBuilder: (context, index) => Divider(height: 5),
             itemCount: 10),
