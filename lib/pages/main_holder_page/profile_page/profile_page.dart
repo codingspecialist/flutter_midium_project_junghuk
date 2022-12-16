@@ -92,6 +92,9 @@ class _TabPageState extends State<ProfilePage> with TickerProviderStateMixin {
 
   Widget _buildTabBar() {
     return TabBar(
+      controller: _tabController,
+      labelColor: Colors.green,
+      unselectedLabelColor: Colors.white,
       tabs: [
         Container(
           height: 40,
@@ -108,10 +111,6 @@ class _TabPageState extends State<ProfilePage> with TickerProviderStateMixin {
           ),
         ),
       ],
-      indicator: BoxDecoration(),
-      labelColor: Colors.white,
-      unselectedLabelColor: Colors.white,
-      controller: _tabController,
     );
   }
 

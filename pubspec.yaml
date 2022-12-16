@@ -29,6 +29,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  validators: ^3.0.0
+  intl: ^0.17.0
+  flutter_riverpod: ^2.0.0-dev.9
+  http: ^0.13.5
+  http_parser: ^4.0.1
+  logger: ^1.1.0
+  flutter_secure_storage: ^7.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
