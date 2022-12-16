@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_midium_project/components/custom_form.dart';
 import 'package:flutter_midium_project/models/size.dart';
+import 'package:flutter_midium_project/pages/login_page/components/custom_login_form.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            CustomForm(),
+            CustomLoginForm(),
           ],
         ),
       ),
