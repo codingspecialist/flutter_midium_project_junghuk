@@ -9,7 +9,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
@@ -21,20 +20,4 @@ class LoginPage extends StatelessWidget {
       backgroundColor: Colors.white,
     );
   }
-}
-
-AppBar _buildAppBar() {
-  return AppBar(
-    title: Text("Login"),
-    actions: [
-      IconButton(
-        icon: Icon(
-          CupertinoIcons.back,
-          size: 23,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
-    ],
-  );
 }
