@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/components/custom_button.dart';
-import 'package:flutter_midium_project/models/size.dart';
+import 'package:flutter_midium_project/core/size.dart';
 
 class ProfileUpdatelPage extends StatelessWidget {
   ProfileUpdatelPage({Key? key}) : super(key: key);

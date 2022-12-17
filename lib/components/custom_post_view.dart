@@ -12,7 +12,6 @@ class CustomPostView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -30,6 +29,7 @@ class CustomPostView extends StatelessWidget {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   width: 230,
@@ -45,21 +45,17 @@ class CustomPostView extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(4.0),
-                  child: Column(
-                    children: [
-                      Image.network(
-                        "https://picsum.photos/id/$number/200/300",
-                        width: 100,
-                        height: 60,
-                        fit: BoxFit.cover,
-                      ),
-                    ],
-                  ),
+                Column(
+                  children: [
+                    Image.network(
+                      "https://picsum.photos/id/$number/200/300",
+                      width: 100,
+                      height: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  ],
                 ),
               ],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
           ],
         ),

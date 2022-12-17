@@ -150,6 +150,9 @@ class _TabPageState extends State<ProfilePage> with TickerProviderStateMixin {
             ),
           ],
         ),
+        SizedBox(
+          height: 5,
+        ),
         CustomEditButton(() {
           Navigator.push(
             context,

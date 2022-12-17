@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_midium_project/models/size.dart';
+import 'package:flutter_midium_project/core/size.dart';
 import 'package:flutter_midium_project/pages/login_page/components/custom_login_form.dart';
 
 class LoginPage extends StatelessWidget {

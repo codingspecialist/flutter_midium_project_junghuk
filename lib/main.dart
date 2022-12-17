@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/core/theme.dart';
+import 'package:flutter_midium_project/pages/join_page/join_page.dart';
+import 'package:flutter_midium_project/pages/login_page/login_page.dart';
 import 'package:flutter_midium_project/pages/main_holder_page/main_holder_page.dart';
-import 'package:flutter_midium_project/pages/post_detail_page/post_detail_page.dart';
 import 'package:flutter_midium_project/pages/post_write_page/post_write_page.dart';
-import 'package:flutter_midium_project/pages/profile_update_page/profile_update_page.dart';
 import 'package:flutter_midium_project/pages/setting_page/setting_page.dart';
 
 void main() {
@@ -19,8 +19,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      initialRoute: "/main",
+      initialRoute: "/login",
       routes: {
+        "/login": (context) => LoginPage(),
+        "/join": (context) => JoinPage(),
         "/main": (context) => MainHolderPage(),
         "/setting": (context) => SettingPage(),
         "/write": (context) => PostWritePage(),

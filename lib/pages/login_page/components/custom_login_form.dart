@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/components/custom_button.dart';
 import 'package:flutter_midium_project/components/custom_text_button.dart';
 import 'package:flutter_midium_project/components/custom_text_form_field.dart';
-import 'package:flutter_midium_project/models/size.dart';
+import 'package:flutter_midium_project/core/size.dart';
 
 class CustomLoginForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -20,7 +20,10 @@ class CustomLoginForm extends StatelessWidget {
             CustomTextFormField("Password"),
             SizedBox(height: large_gap),
             CustomButton(() {}, "로그인"),
-            CustomTextButton(() {}, "회원가입 페이지로 이동"),
+            CustomTextButton(() {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, "/join", (route) => false);
+            }, "회원가입 페이지로 이동"),
           ],
         ),
       ),
