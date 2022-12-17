@@ -72,17 +72,12 @@ class PostService {
     Response response = await httpConnector
         .get("/s/post/profileListForm/$userId", jwtToken: jwtToken);
 
-    Logger().d(response.body);
     ResponseDto responseDto = toResponseDto(response);
 
     if (responseDto.code == 1) {
-      Logger().d("fetchPostProfileList 통신성공");
       PostProfile postProfile =
           PostProfile.fromJson(responseDto.data); // dynamic
       responseDto.data = postProfile;
-      Logger().d("길이");
-      Logger().d(postProfile.myPostListDto.length);
-      Logger().d(postProfile.myVisitListDto.length);
     }
 
     return responseDto;

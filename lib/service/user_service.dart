@@ -6,7 +6,6 @@ import 'package:flutter_midium_project/dto/user_req_dto.dart';
 import 'package:flutter_midium_project/model/session_user.dart';
 import 'package:flutter_midium_project/model/user.dart';
 import 'package:http/http.dart';
-import 'package:logger/logger.dart';
 
 class UserService {
   final HttpConnector httpConnector = HttpConnector();
@@ -19,9 +18,7 @@ class UserService {
 
   Future<ResponseDto> fetchJoin(JoinReqDto joinReqDto) async {
     String requestBody = jsonEncode(joinReqDto.toJson());
-    Logger().d(requestBody);
     Response response = await httpConnector.post("/user/join", requestBody);
-    Logger().d(response.body);
     return toResponseDto(response); // ResponseDto 응답
   }
 
@@ -31,7 +28,6 @@ class UserService {
 
     // 2. 통신 시작
     Response response = await httpConnector.post("/user/login", requestBody);
-    Logger().d(response.body);
     // 3. 토큰 받기
     String jwtToken = response.headers["authorization"].toString();
 

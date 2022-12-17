@@ -24,9 +24,9 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
   Ref ref;
 
   Future<void> notifyViewModel() async {
-    Logger().d("profileViewModel 초기화 시작");
     ResponseDto responseDto = await PostService().fetchPostProfileList(
-        ref.read(authProvider).jwtToken, ref.read(authProvider).user.userId);
+        ref.read(authProvider).sessionUser.jwtToken,
+        ref.read(authProvider).sessionUser.user.userId);
 
     if (responseDto.code == 1) {
       state = ProfileState(postProfile: responseDto.data);

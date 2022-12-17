@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/dto/response_dto.dart';
 import 'package:flutter_midium_project/dto/user_req_dto.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_midium_project/model/session_user.dart';
 import 'package:flutter_midium_project/provider/auth_provider.dart';
 import 'package:flutter_midium_project/service/user_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 final userController = Provider<UserController>((ref) {
   return UserController(ref);
@@ -16,8 +14,8 @@ final userController = Provider<UserController>((ref) {
 class UserController {
   final mContext = navigatorKey.currentContext;
   final UserService userService = UserService();
-  final Ref _ref;
-  UserController(this._ref);
+  final Ref ref;
+  UserController(this.ref);
 
   Future<void> join(
       {required String username,
@@ -48,7 +46,8 @@ class UserController {
 
     if (responseDto.code == 1) {
       SessionUser sessionUser = responseDto.data;
-      _ref.read(authProvider.notifier).authentication(sessionUser);
+      ref.read(authProvider).authentication(sessionUser);
+      //_ref.read(authProvider.notifier).authentication(sessionUser);
       Navigator.pushNamedAndRemoveUntil(mContext!, "/main", (route) => false);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
@@ -58,7 +57,8 @@ class UserController {
   }
 
   Future<void> logout() async {
-    _ref.read(authProvider.notifier).inValidate();
+    ref.read(authProvider).inValidate();
+    // _ref.read(authProvider.notifier).inValidate();
     await Navigator.of(navigatorKey.currentContext!)
         .pushNamedAndRemoveUntil("/login", (route) => false);
   }

@@ -11,21 +11,41 @@ import 'package:logger/logger.dart';
 
 const secureStorage = FlutterSecureStorage();
 
-final authProvider = StateNotifierProvider<AuthProvider, SessionUser>((ref) {
+// final authProvider = StateNotifierProvider<AuthProvider, SessionUser>((ref) {
+//   return AuthProvider(SessionUser(null, null, false));
+// });
+
+// class AuthProvider extends StateNotifier<SessionUser> {
+//   final mContext = navigatorKey.currentContext;
+//   AuthProvider(super.state);
+
+//   Future<void> authentication(SessionUser sessionUser) async {
+//     state = sessionUser;
+//     await secureStorage.write(key: "jwtToken", value: sessionUser.jwtToken);
+//   }
+
+//   Future<void> inValidate() async {
+//     state = SessionUser(null, null, false);
+//     await secureStorage.delete(key: "jwtToken");
+//   }
+// }
+
+final authProvider = Provider<AuthProvider>((ref) {
   return AuthProvider(SessionUser(null, null, false));
 });
 
-class AuthProvider extends StateNotifier<SessionUser> {
+class AuthProvider {
   final mContext = navigatorKey.currentContext;
-  AuthProvider(super.state);
+  SessionUser sessionUser;
+  AuthProvider(this.sessionUser);
 
-  Future<void> authentication(SessionUser sessionUser) async {
-    state = sessionUser;
-    await secureStorage.write(key: "jwtToken", value: sessionUser.jwtToken);
+  Future<void> authentication(SessionUser newSessionUser) async {
+    await secureStorage.write(key: "jwtToken", value: newSessionUser.jwtToken);
+    sessionUser = newSessionUser;
   }
 
   Future<void> inValidate() async {
-    state = SessionUser(null, null, false);
     await secureStorage.delete(key: "jwtToken");
+    sessionUser = SessionUser(null, null, false);
   }
 }

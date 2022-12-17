@@ -24,11 +24,11 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
   Ref ref;
 
   Future<void> notifyViewModel() async {
-    ResponseDto responseDtoDaily =
-        await PostService().fetchPostDailyList(ref.read(authProvider).jwtToken);
+    ResponseDto responseDtoDaily = await PostService()
+        .fetchPostDailyList(ref.read(authProvider).sessionUser.jwtToken);
 
     ResponseDto responseDtoBusiness = await PostService()
-        .fetchPostBusinessList(ref.read(authProvider).jwtToken);
+        .fetchPostBusinessList(ref.read(authProvider).sessionUser.jwtToken);
 
     if (responseDtoDaily.code == 1 && responseDtoBusiness.code == 1) {
       state = HomePageState(

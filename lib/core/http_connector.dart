@@ -7,7 +7,6 @@ class HttpConnector {
 
   static final HttpConnector _instance = HttpConnector._single();
   factory HttpConnector() {
-    Logger().d("HttpConnector 생성자");
     return _instance;
   }
   HttpConnector._single();

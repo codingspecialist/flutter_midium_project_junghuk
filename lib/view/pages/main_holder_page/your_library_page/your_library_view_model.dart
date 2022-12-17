@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/dto/response_dto.dart';
 import 'package:flutter_midium_project/main.dart';
-import 'package:flutter_midium_project/model/post.dart';
 import 'package:flutter_midium_project/model/post_love.dart';
 import 'package:flutter_midium_project/provider/auth_provider.dart';
 import 'package:flutter_midium_project/service/post_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class YourLibraryState {
   List<PostLove>? postLoveList;
@@ -25,8 +23,8 @@ class YourLibraryViewModel extends StateNotifier<YourLibraryState> {
   Ref ref;
 
   Future<void> notifyViewModel() async {
-    ResponseDto responseDto =
-        await PostService().fetchPostLoveList(ref.read(authProvider).jwtToken);
+    ResponseDto responseDto = await PostService()
+        .fetchPostLoveList(ref.read(authProvider).sessionUser.jwtToken);
 
     if (responseDto.code == 1) {
       state = YourLibraryState(postLoveList: responseDto.data);
