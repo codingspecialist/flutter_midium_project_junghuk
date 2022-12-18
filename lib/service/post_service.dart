@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter_midium_project/core/http_connector.dart';
+import 'package:flutter_midium_project/dto/post_req_dto.dart';
 import 'package:flutter_midium_project/dto/response_dto.dart';
 import 'package:flutter_midium_project/model/post.dart';
 import 'package:flutter_midium_project/model/post_love.dart';
 import 'package:flutter_midium_project/model/post_profile.dart';
 import 'package:http/http.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:logger/logger.dart';
 
 class PostService {
@@ -79,6 +83,27 @@ class PostService {
           PostProfile.fromJson(responseDto.data); // dynamic
       responseDto.data = postProfile;
     }
+
+    return responseDto;
+  }
+
+  Future<ResponseDto> fetchWrite(
+      PostWriteReqDto postWriteReqDto, String filePath, String jwtToken) async {
+    var request = MultipartRequest(
+        "POST", Uri.parse("http://192.168.0.2:8000/s/post/write"));
+
+    MultipartFile file = await MultipartFile.fromPath("file", filePath);
+    MultipartFile saveReqDto = MultipartFile.fromString(
+        "saveReqDto", jsonEncode(postWriteReqDto.toJson()),
+        contentType: MediaType("application", "json"));
+
+    request.headers["Authorization"] = jwtToken;
+    request.files.add(file);
+    request.files.add(saveReqDto);
+
+    Response response = await Response.fromStream(await request.send());
+
+    ResponseDto responseDto = toResponseDto(response);
 
     return responseDto;
   }

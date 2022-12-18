@@ -1,29 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_midium_project/controller/post_controller.dart';
 import 'package:flutter_midium_project/view/components/custom_button.dart';
 import 'package:flutter_midium_project/view/components/custom_text_form_field.dart';
 import 'package:flutter_midium_project/core/size.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
-class CustomPostWriteForm extends StatefulWidget {
+class CustomPostWriteForm extends ConsumerStatefulWidget {
   @override
-  State<CustomPostWriteForm> createState() => _CustomPostWriteFormState();
+  ConsumerState<CustomPostWriteForm> createState() =>
+      _CustomPostWriteFormState();
 }
 
-class _CustomPostWriteFormState extends State<CustomPostWriteForm> {
+class _CustomPostWriteFormState extends ConsumerState<CustomPostWriteForm> {
   final _formKey = GlobalKey<FormState>();
-  final _title = TextEditingController(); // 추가
-  final _content = TextEditingController(); // 추가
+  final _postTitle = TextEditingController(); // 추가
+  final _postContent = TextEditingController(); // 추가
   String _role = "daily";
+  dynamic filePath;
 
   @override
   Widget build(BuildContext context) {
+    PostController postCT = ref.read(postController);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Form(
         key: _formKey,
         child: Column(
           children: [
-            CustomTextFormField("Title"),
-            CustomTextFormField("Content"),
+            TextButton(
+              onPressed: () async {
+                XFile? selectImage = await ImagePicker().pickImage(
+                  //이미지를 선택
+                  source: ImageSource.gallery, //위치는 갤러리
+                  maxHeight: 75,
+                  maxWidth: 75,
+                  imageQuality: 30, // 이미지 크기 압축을 위해 퀄리티를 30으로 낮춤.
+                );
+                if (selectImage != null) {
+                  filePath = selectImage.path;
+                }
+              },
+              child: Text("이미지선택"),
+            ),
+            CustomTextFormField(
+              "Title",
+              controller: _postTitle,
+            ),
+            CustomTextFormField(
+              "Content",
+              controller: _postContent,
+            ),
             Row(
               children: [
                 Expanded(
@@ -53,7 +80,13 @@ class _CustomPostWriteFormState extends State<CustomPostWriteForm> {
               ],
             ),
             SizedBox(height: large_gap),
-            CustomButton(() {}, "글쓰기"),
+            CustomButton(() {
+              postCT.write(
+                  postTitle: _postTitle.text.trim(),
+                  postContent: _postContent.text.trim(),
+                  role: _role,
+                  filePath: filePath);
+            }, "글쓰기"),
           ],
         ),
       ),
