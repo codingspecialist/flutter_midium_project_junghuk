@@ -40,4 +40,19 @@ class UserService {
 
     return responseDto; // ResponseDto 응답
   }
+
+  Future<ResponseDto> fetchProfileUpdate(
+      String filePath, String jwtToken) async {
+    var request = MultipartRequest(
+        "PUT", Uri.parse("http://192.168.0.2:8000/s/user/update"));
+    MultipartFile file = await MultipartFile.fromPath("file", filePath);
+    request.headers["Authorization"] = jwtToken;
+    request.files.add(file);
+
+    Response response = await Response.fromStream(await request.send());
+
+    ResponseDto responseDto = toResponseDto(response);
+
+    return responseDto;
+  }
 }

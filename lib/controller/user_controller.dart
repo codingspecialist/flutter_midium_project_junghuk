@@ -62,4 +62,18 @@ class UserController {
     await Navigator.of(navigatorKey.currentContext!)
         .pushNamedAndRemoveUntil("/login", (route) => false);
   }
+
+  Future<void> userProfileAdd(String filePath) async {
+    ResponseDto responseDto = await userService.fetchProfileUpdate(
+        filePath, ref.read(authProvider).sessionUser.jwtToken);
+    if (responseDto.code == 1) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        const SnackBar(content: Text("사진 업로드 성공 ")),
+      );
+    } else {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("사진업로드 실패 : ${responseDto.msg}")),
+      );
+    }
+  }
 }
