@@ -28,3 +28,12 @@ Postview - 메서드 배경화면 검은색으로 바꾸기
 -> 회원수정페이지
 
 -> 게시글 등록할 때 일상인지 비즈니스있지 체크박스 추가
+
+```dart
+Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OtherProfilePage(dailyPosts[index].),
+                    ),
+                  );
+```

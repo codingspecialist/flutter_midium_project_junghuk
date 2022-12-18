@@ -5,6 +5,7 @@ import 'package:flutter_midium_project/view/components/custom_post_view.dart';
 import 'package:flutter_midium_project/view/components/custom_widget.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/home_page/home_page_view_model.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/main_holder_appbar.dart';
+import 'package:flutter_midium_project/view/pages/other_profile_page/other_profile_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
@@ -85,7 +86,8 @@ class _TabPageState extends ConsumerState<HomePage>
     } else {
       return ListView.separated(
           itemBuilder: (context, index) {
-            return CustomPostView(dailyPosts[index]);
+            return InkWell(
+                onTap: () {}, child: CustomPostView(dailyPosts[index]));
           },
           separatorBuilder: (context, index) => Divider(height: 5),
           itemCount: dailyPosts.length);

@@ -1,29 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/model/post_profile.dart';
-import 'package:flutter_midium_project/view/components/custom_button.dart';
 import 'package:flutter_midium_project/view/components/custom_edit_button.dart';
 import 'package:flutter_midium_project/view/components/custom_follow_button.dart';
-import 'package:flutter_midium_project/view/components/custom_post_love_view.dart';
 import 'package:flutter_midium_project/view/components/custom_post_my_view.dart';
-import 'package:flutter_midium_project/view/components/custom_post_view.dart';
 import 'package:flutter_midium_project/view/components/custom_post_visit_view.dart';
-import 'package:flutter_midium_project/view/components/custom_text_button.dart';
 import 'package:flutter_midium_project/view/components/custom_widget.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/main_holder_appbar.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/profile_page/profile_page_view_model.dart';
+import 'package:flutter_midium_project/view/pages/other_profile_page/other_profile_page_view_model.dart';
 import 'package:flutter_midium_project/view/pages/profile_update_page/profile_update_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-class ProfilePage extends ConsumerStatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class OtherProfilePage extends ConsumerStatefulWidget {
+  int userId;
+  OtherProfilePage(this.userId, {Key? key}) : super(key: key);
 
   @override
   ConsumerState createState() => _TabPageState();
 }
 
-class _TabPageState extends ConsumerState<ProfilePage>
+class _TabPageState extends ConsumerState<OtherProfilePage>
     with TickerProviderStateMixin {
   late TabController _tabController;
 
@@ -38,11 +36,12 @@ class _TabPageState extends ConsumerState<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    Logger().d("디버그 : ProfilePage 실행됨");
-    ProfileState profileState = ref.watch(profileViewModel);
+    Logger().d("디버그 : OtherProfilePage 실행됨");
+    OtherProfileState profileState =
+        ref.watch(otherProfileViewModel(widget.userId));
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: mainHolderAppBar(context, "Profile"),
+      appBar: mainHolderAppBar(context, "OtherProfile"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: NestedScrollView(
@@ -63,7 +62,7 @@ class _TabPageState extends ConsumerState<ProfilePage>
     );
   }
 
-  Widget _buildHeader(ProfileState profileState) {
+  Widget _buildHeader(OtherProfileState profileState) {
     PostProfile? postProfile = profileState.postProfile;
     if (postProfile == null) {
       return const Center(
@@ -120,7 +119,7 @@ class _TabPageState extends ConsumerState<ProfilePage>
     }
   }
 
-  Widget _buildTab(ProfileState profileState) {
+  Widget _buildTab(OtherProfileState profileState) {
     return Column(
       children: [
         _buildTabBar(),
@@ -133,7 +132,7 @@ class _TabPageState extends ConsumerState<ProfilePage>
     );
   }
 
-  Widget _buildTabBarView(ProfileState profileState) {
+  Widget _buildTabBarView(OtherProfileState profileState) {
     PostProfile? postProfile = profileState.postProfile;
 
     if (postProfile == null) {

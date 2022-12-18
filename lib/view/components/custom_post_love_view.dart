@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/model/post_love.dart';
+import 'package:flutter_midium_project/view/pages/other_profile_page/other_profile_page.dart';
 
 class CustomPostLoveView extends StatelessWidget {
   final PostLove postLove;
@@ -24,10 +25,21 @@ class CustomPostLoveView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      radius: 16,
-                      backgroundImage: NetworkImage(
-                          "http://192.168.0.2:8000/${postLove.profileImg}"),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                OtherProfilePage(postLove.userId),
+                          ),
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 16,
+                        backgroundImage: NetworkImage(
+                            "http://192.168.0.2:8000/${postLove.profileImg}"),
+                      ),
                     ),
                     SizedBox(width: 10),
                     Text(

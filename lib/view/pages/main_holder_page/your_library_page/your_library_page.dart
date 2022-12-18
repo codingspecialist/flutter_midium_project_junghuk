@@ -3,6 +3,7 @@ import 'package:flutter_midium_project/model/post_love.dart';
 import 'package:flutter_midium_project/view/components/custom_post_love_view.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/main_holder_appbar.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/your_library_page/your_library_view_model.dart';
+import 'package:flutter_midium_project/view/pages/other_profile_page/other_profile_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
