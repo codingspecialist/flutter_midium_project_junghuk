@@ -14,6 +14,7 @@ import 'package:flutter_midium_project/view/pages/main_holder_page/main_holder_a
 import 'package:flutter_midium_project/view/pages/main_holder_page/profile_page/profile_page_view_model.dart';
 import 'package:flutter_midium_project/view/pages/profile_update_page/profile_update_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class ProfilePage extends ConsumerStatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _TabPageState extends ConsumerState<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("디버그 : ProfilePage 실행됨");
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: mainHolderAppBar(context, "Profile"),

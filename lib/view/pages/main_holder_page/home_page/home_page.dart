@@ -6,6 +6,7 @@ import 'package:flutter_midium_project/view/components/custom_widget.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/home_page/home_page_view_model.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/main_holder_appbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,6 +30,7 @@ class _TabPageState extends ConsumerState<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("디버그 : HomePage 실행됨");
     return Scaffold(
       appBar: mainHolderAppBar(context, "홈"),
       backgroundColor: Colors.black,

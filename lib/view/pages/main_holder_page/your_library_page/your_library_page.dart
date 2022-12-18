@@ -4,12 +4,14 @@ import 'package:flutter_midium_project/view/components/custom_post_love_view.dar
 import 'package:flutter_midium_project/view/pages/main_holder_page/main_holder_appbar.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/your_library_page/your_library_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class YourLibraryPage extends ConsumerWidget {
   const YourLibraryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Logger().d("디버그 : YourLibraryPage 실행됨");
     YourLibraryState yourLibraryState = ref.watch(yourLibraryViewModel);
     return Scaffold(
       backgroundColor: Colors.black,
