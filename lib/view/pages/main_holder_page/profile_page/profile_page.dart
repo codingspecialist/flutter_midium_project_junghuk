@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_midium_project/core/host_info.dart';
 import 'package:flutter_midium_project/model/post_profile.dart';
-import 'package:flutter_midium_project/view/components/custom_button.dart';
 import 'package:flutter_midium_project/view/components/custom_edit_button.dart';
 import 'package:flutter_midium_project/view/components/custom_follow_button.dart';
-import 'package:flutter_midium_project/view/components/custom_post_love_view.dart';
 import 'package:flutter_midium_project/view/components/custom_post_my_view.dart';
-import 'package:flutter_midium_project/view/components/custom_post_view.dart';
 import 'package:flutter_midium_project/view/components/custom_post_visit_view.dart';
-import 'package:flutter_midium_project/view/components/custom_text_button.dart';
 import 'package:flutter_midium_project/view/components/custom_widget.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/main_holder_appbar.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/profile_page/profile_page_view_model.dart';
@@ -65,6 +62,7 @@ class _TabPageState extends ConsumerState<ProfilePage>
 
   Widget _buildHeader(ProfileState profileState) {
     PostProfile? postProfile = profileState.postProfile;
+
     if (postProfile == null) {
       return const Center(
         child: CircularProgressIndicator(),
@@ -74,12 +72,13 @@ class _TabPageState extends ConsumerState<ProfilePage>
         children: [
           Row(
             children: [
-              const SizedBox(
+              SizedBox(
                 width: 60,
                 height: 60,
                 child: CircleAvatar(
                   radius: 16,
-                  backgroundImage: AssetImage("assets/images/cat1.jpg"),
+                  backgroundImage:
+                      NetworkImage("$host/${postProfile.profileImg}"),
                 ),
               ),
               SizedBox(
@@ -112,7 +111,8 @@ class _TabPageState extends ConsumerState<ProfilePage>
           CustomEditButton(() {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProfileUpdatelPage()),
+              MaterialPageRoute(
+                  builder: (context) => ProfileUpdatelPage(postProfile)),
             );
           }, "Edit your Profile"),
         ],
@@ -156,8 +156,8 @@ class _TabPageState extends ConsumerState<ProfilePage>
           ListView.separated(
               itemBuilder: (context, index) {
                 return Container(
-                  child:
-                      (CustomPostVisitView(postProfile.myVisitListDto[index])),
+                  child: (CustomPostVisitView(
+                      postProfile.myVisitListDto[index], postProfile.nickname)),
                 );
               },
               separatorBuilder: (context, index) => Divider(),

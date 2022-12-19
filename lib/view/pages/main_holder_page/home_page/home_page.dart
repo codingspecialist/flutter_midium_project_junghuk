@@ -86,8 +86,7 @@ class _TabPageState extends ConsumerState<HomePage>
     } else {
       return ListView.separated(
           itemBuilder: (context, index) {
-            return InkWell(
-                onTap: () {}, child: CustomPostView(dailyPosts[index]));
+            return CustomPostView(dailyPosts[index]);
           },
           separatorBuilder: (context, index) => Divider(height: 5),
           itemCount: dailyPosts.length);

@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter_midium_project/core/host_info.dart';
 import 'package:flutter_midium_project/core/http_connector.dart';
 import 'package:flutter_midium_project/dto/post_req_dto.dart';
 import 'package:flutter_midium_project/dto/response_dto.dart';
+import 'package:flutter_midium_project/model/follow.dart';
 import 'package:flutter_midium_project/model/post.dart';
+import 'package:flutter_midium_project/model/post_detail.dart';
 import 'package:flutter_midium_project/model/post_love.dart';
 import 'package:flutter_midium_project/model/post_profile.dart';
 import 'package:http/http.dart';
@@ -17,6 +20,24 @@ class PostService {
   PostService._single();
   factory PostService() {
     return _instance;
+  }
+
+  Future<ResponseDto> fetchPostDetail(String jwtToken, int postId) async {
+    Response response = await httpConnector.get("/s/post/detailForm/$postId",
+        jwtToken: jwtToken);
+    Logger().d(response.body);
+
+    ResponseDto responseDto = toResponseDto(response);
+    if (responseDto.code == 1) {
+      PostDetail postDetail = PostDetail.fromJson(responseDto.data);
+      responseDto.data = postDetail;
+      Logger().d(postDetail.nickname);
+      Logger().d(postDetail.postTitle);
+      Logger().d(postDetail.postContent);
+      Logger().d(postDetail.postThumnail);
+    }
+
+    return responseDto;
   }
 
   Future<ResponseDto> fetchPostDailyList(String jwtToken) async {
@@ -60,7 +81,7 @@ class PostService {
   Future<ResponseDto> fetchPostLoveList(String jwtToken) async {
     Response response =
         await httpConnector.get("/s/love/listForm", jwtToken: jwtToken);
-
+    Logger().d(response.body);
     ResponseDto responseDto = toResponseDto(response);
     if (responseDto.code == 1) {
       List<dynamic> mapList = responseDto.data; // dynamic
@@ -75,7 +96,7 @@ class PostService {
   Future<ResponseDto> fetchPostProfileList(String jwtToken, int userId) async {
     Response response = await httpConnector
         .get("/s/post/profileListForm/$userId", jwtToken: jwtToken);
-
+    Logger().d(response.body);
     ResponseDto responseDto = toResponseDto(response);
 
     if (responseDto.code == 1) {
@@ -89,8 +110,7 @@ class PostService {
 
   Future<ResponseDto> fetchWrite(
       PostWriteReqDto postWriteReqDto, String filePath, String jwtToken) async {
-    var request = MultipartRequest(
-        "POST", Uri.parse("http://192.168.0.2:8000/s/post/write"));
+    var request = MultipartRequest("POST", Uri.parse("$host/s/post/write"));
 
     MultipartFile file = await MultipartFile.fromPath("file", filePath);
     MultipartFile saveReqDto = MultipartFile.fromString(
@@ -102,8 +122,22 @@ class PostService {
     request.files.add(saveReqDto);
 
     Response response = await Response.fromStream(await request.send());
-
+    Logger().d(response.body);
     ResponseDto responseDto = toResponseDto(response);
+
+    return responseDto;
+  }
+
+  Future<ResponseDto> fetchFollowUnFollow(String jwtToken, int userId) async {
+    Response response = await httpConnector.post("/s/subscribe/$userId", "",
+        jwtToken: jwtToken);
+    Logger().d(response.body);
+    ResponseDto responseDto = toResponseDto(response);
+
+    if (responseDto.code == 1) {
+      Follow postProfile = Follow.fromJson(responseDto.data); // dynamic
+      responseDto.data = postProfile;
+    }
 
     return responseDto;
   }

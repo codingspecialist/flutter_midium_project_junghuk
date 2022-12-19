@@ -12,6 +12,7 @@ import 'package:flutter_midium_project/service/user_service.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/home_page/home_page_view_model.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/profile_page/profile_page_view_model.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/your_library_page/your_library_view_model.dart';
+import 'package:flutter_midium_project/view/pages/other_profile_page/other_profile_page_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
@@ -24,6 +25,18 @@ class PostController {
   final PostService postService = PostService();
   final Ref ref;
   PostController(this.ref);
+
+  Future<void> followUnFollow(int userId) async {
+    ResponseDto responseDto = await postService.fetchFollowUnFollow(
+        ref.read(authProvider).sessionUser.jwtToken, userId);
+    if (responseDto.code == 1) {
+      ref.read(otherProfileViewModel(userId).notifier).notifyViewModel();
+    } else {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("구독 or 구독취소 실패 : ${responseDto.msg}")),
+      );
+    }
+  }
 
   Future<void> write(
       {required String postTitle,

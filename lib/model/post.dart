@@ -1,5 +1,6 @@
 class Post {
   Post({
+    required this.ownerUserId,
     required this.postId,
     required this.postTitle,
     required this.postContent,
@@ -10,6 +11,7 @@ class Post {
     required this.createdAt,
   });
 
+  int ownerUserId;
   int postId;
   String postTitle;
   String postContent;
@@ -20,6 +22,7 @@ class Post {
   DateTime createdAt;
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
+        ownerUserId: json["ownerUserId"],
         postId: json["postId"],
         postTitle: json["postTitle"],
         postContent: json["postContent"],
@@ -31,6 +34,7 @@ class Post {
       );
 
   Map<String, dynamic> toJson() => {
+        "ownerUserId": ownerUserId,
         "postId": postId,
         "postTitle": postTitle,
         "postContent": postContent,

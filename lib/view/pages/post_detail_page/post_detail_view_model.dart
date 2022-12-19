@@ -1,36 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/dto/response_dto.dart';
 import 'package:flutter_midium_project/main.dart';
-import 'package:flutter_midium_project/model/post_profile.dart';
+import 'package:flutter_midium_project/model/post_detail.dart';
 import 'package:flutter_midium_project/provider/auth_provider.dart';
 import 'package:flutter_midium_project/service/post_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OtherProfileState {
-  PostProfile? postProfile;
+class PostDetailState {
+  PostDetail? postDetail;
 
-  OtherProfileState({this.postProfile});
+  PostDetailState({this.postDetail});
 }
 
-final otherProfileViewModel =
-    StateNotifierProvider.family<OtherProfileViewModel, OtherProfileState, int>(
-        (ref, userId) {
-  return OtherProfileViewModel(OtherProfileState(), ref, userId)
-    ..notifyViewModel();
+final postDetailViewModel =
+    StateNotifierProvider.family<PostDetailViewModel, PostDetailState, int>(
+        (ref, postId) {
+  return PostDetailViewModel(PostDetailState(), ref)..notifyViewModel(postId);
 });
 
-class OtherProfileViewModel extends StateNotifier<OtherProfileState> {
-  OtherProfileViewModel(super.state, this.ref, this.userId);
+class PostDetailViewModel extends StateNotifier<PostDetailState> {
+  PostDetailViewModel(super.state, this.ref);
   final mContext = navigatorKey.currentContext;
   Ref ref;
-  int userId;
 
-  Future<void> notifyViewModel() async {
-    ResponseDto responseDto = await PostService().fetchPostProfileList(
-        ref.read(authProvider).sessionUser.jwtToken, userId);
+  Future<void> notifyViewModel(int postId) async {
+    ResponseDto responseDto = await PostService()
+        .fetchPostDetail(ref.read(authProvider).sessionUser.jwtToken, postId);
 
     if (responseDto.code == 1) {
-      state = OtherProfileState(postProfile: responseDto.data);
+      state = PostDetailState(postDetail: responseDto.data);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
         const SnackBar(content: Text("Jwt 토큰이 만료되었습니다. 로그인 페이지로 이동합니다.")),

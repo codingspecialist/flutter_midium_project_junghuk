@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/controller/post_controller.dart';
 import 'package:flutter_midium_project/controller/user_controller.dart';
+import 'package:flutter_midium_project/core/host_info.dart';
+import 'package:flutter_midium_project/model/post_profile.dart';
 import 'package:flutter_midium_project/view/components/custom_button.dart';
 import 'package:flutter_midium_project/core/size.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileUpdatelPage extends ConsumerWidget {
-  ProfileUpdatelPage({Key? key}) : super(key: key);
+  PostProfile postProfile;
+  ProfileUpdatelPage(this.postProfile, {Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
   dynamic filePath;
 
@@ -20,12 +23,12 @@ class ProfileUpdatelPage extends ConsumerWidget {
         iconTheme: IconThemeData(color: Colors.white),
         title: Text("ProfileUpdate"),
       ),
-      body: _buildBody(userCT),
+      body: _buildBody(userCT, postProfile),
       backgroundColor: Colors.white,
     );
   }
 
-  Widget _buildBody(UserController userCT) {
+  Widget _buildBody(UserController userCT, PostProfile postProfile) {
     return ListView(
       children: [
         SizedBox(),
@@ -52,7 +55,8 @@ class ProfileUpdatelPage extends ConsumerWidget {
                   height: 100,
                   child: CircleAvatar(
                     radius: 16,
-                    backgroundImage: AssetImage("assets/images/cat1.jpg"),
+                    backgroundImage:
+                        NetworkImage("$host/${postProfile.profileImg}"),
                   ),
                 ),
               ),

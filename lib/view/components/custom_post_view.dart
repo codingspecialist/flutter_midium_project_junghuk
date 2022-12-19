@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_midium_project/core/host_info.dart';
 import 'package:flutter_midium_project/model/post.dart';
+import 'package:flutter_midium_project/model/post_detail.dart';
+import 'package:flutter_midium_project/view/pages/other_profile_page/other_profile_page.dart';
+import 'package:flutter_midium_project/view/pages/post_detail_page/post_detail_page.dart';
 
 class CustomPostView extends StatelessWidget {
   final Post post;
@@ -20,44 +24,64 @@ class CustomPostView extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 16,
-                        backgroundImage: NetworkImage(
-                            "http://192.168.0.2:8000/${post.profileImg}"),
-                      ),
-                      SizedBox(width: 8),
-                      Text(" ${post.nickname}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                          )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    maxLines: 2,
-                    "${post.postTitle}",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                        fontStyle: FontStyle.italic),
-                  ),
-                ],
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OtherProfilePage(post.ownerUserId),
+                    ),
+                  );
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 16,
+                          backgroundImage:
+                              NetworkImage("$host/${post.profileImg}"),
+                        ),
+                        SizedBox(width: 8),
+                        Text(" ${post.nickname}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      maxLines: 2,
+                      "${post.postTitle}",
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic),
+                    ),
+                  ],
+                ),
               ),
             ),
-            Image.network(
-              "http://192.168.0.2:8000/${post.postThumnail}",
-              width: 100,
-              height: 60,
-              fit: BoxFit.cover,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PostDetailPage(post.postId),
+                  ),
+                );
+              },
+              child: Image.network(
+                "$host/${post.postThumnail}",
+                width: 100,
+                height: 60,
+                fit: BoxFit.cover,
+              ),
             ),
           ],
         ),

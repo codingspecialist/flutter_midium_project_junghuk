@@ -1,5 +1,6 @@
 class PostProfile {
   PostProfile({
+    required this.userId,
     required this.username,
     required this.nickname,
     required this.email,
@@ -10,29 +11,32 @@ class PostProfile {
     required this.subscribe,
   });
 
+  int userId;
   String username;
   String nickname;
   String email;
   String profileImg;
-  List<MyVisitListDto> myVisitListDto;
-  List<MyPostListDto> myPostListDto;
+  List<MyTListDto> myVisitListDto;
+  List<MyTListDto> myPostListDto;
   bool my;
   bool subscribe;
 
   factory PostProfile.fromJson(Map<String, dynamic> json) => PostProfile(
+        userId: json["userId"],
         username: json["username"],
         nickname: json["nickname"],
         email: json["email"],
         profileImg: json["profileImg"],
-        myVisitListDto: List<MyVisitListDto>.from(
-            json["myVisitListDto"].map((x) => MyVisitListDto.fromJson(x))),
-        myPostListDto: List<MyPostListDto>.from(
-            json["myPostListDto"].map((x) => MyPostListDto.fromJson(x))),
+        myVisitListDto: List<MyTListDto>.from(
+            json["myVisitListDto"].map((x) => MyTListDto.fromJson(x))),
+        myPostListDto: List<MyTListDto>.from(
+            json["myPostListDto"].map((x) => MyTListDto.fromJson(x))),
         my: json["my"],
         subscribe: json["subscribe"],
       );
 
   Map<String, dynamic> toJson() => {
+        "userId": userId,
         "username": username,
         "nickname": nickname,
         "email": email,
@@ -46,10 +50,10 @@ class PostProfile {
       };
 }
 
-class MyPostListDto {
-  MyPostListDto({
+class MyTListDto {
+  MyTListDto({
+    required this.ownerUserId,
     required this.postId,
-    required this.userId,
     required this.postTitle,
     required this.postContent,
     required this.postThumnail,
@@ -57,17 +61,17 @@ class MyPostListDto {
     required this.updatedAt,
   });
 
+  int ownerUserId;
   int postId;
-  int userId;
   String postTitle;
   String postContent;
   String postThumnail;
   String role;
   DateTime updatedAt;
 
-  factory MyPostListDto.fromJson(Map<String, dynamic> json) => MyPostListDto(
+  factory MyTListDto.fromJson(Map<String, dynamic> json) => MyTListDto(
+        ownerUserId: json["ownerUserId"],
         postId: json["postId"],
-        userId: json["userId"],
         postTitle: json["postTitle"],
         postContent: json["postContent"],
         postThumnail: json["postThumnail"],
@@ -76,56 +80,12 @@ class MyPostListDto {
       );
 
   Map<String, dynamic> toJson() => {
+        "ownerUserId": ownerUserId,
         "postId": postId,
-        "userId": userId,
         "postTitle": postTitle,
         "postContent": postContent,
         "postThumnail": postThumnail,
         "role": role,
         "updatedAt": updatedAt.toIso8601String(),
-      };
-}
-
-class MyVisitListDto {
-  MyVisitListDto({
-    required this.postId,
-    required this.userId,
-    required this.postTitle,
-    required this.postContent,
-    required this.postThumnail,
-    required this.username,
-    required this.nickname,
-    required this.profileImg,
-  });
-
-  int postId;
-  int userId;
-  String postTitle;
-  String postContent;
-  String postThumnail;
-  String username;
-  String nickname;
-  String profileImg;
-
-  factory MyVisitListDto.fromJson(Map<String, dynamic> json) => MyVisitListDto(
-        postId: json["postId"],
-        userId: json["userId"],
-        postTitle: json["postTitle"],
-        postContent: json["postContent"],
-        postThumnail: json["postThumnail"],
-        username: json["username"],
-        nickname: json["nickname"],
-        profileImg: json["profileImg"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "postId": postId,
-        "userId": userId,
-        "postTitle": postTitle,
-        "postContent": postContent,
-        "postThumnail": postThumnail,
-        "username": username,
-        "nickname": nickname,
-        "profileImg": profileImg,
       };
 }

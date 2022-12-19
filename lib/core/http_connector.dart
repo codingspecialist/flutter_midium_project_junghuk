@@ -1,8 +1,8 @@
+import 'package:flutter_midium_project/core/host_info.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
 class HttpConnector {
-  final host = "http://192.168.0.2:8000";
   final headers = {"Content-Type": "application/json; charset=utf-8"};
 
   static final HttpConnector _instance = HttpConnector._single();

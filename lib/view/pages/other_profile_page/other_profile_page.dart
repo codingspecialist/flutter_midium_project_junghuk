@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_midium_project/controller/post_controller.dart';
+import 'package:flutter_midium_project/core/host_info.dart';
 import 'package:flutter_midium_project/model/post_profile.dart';
 import 'package:flutter_midium_project/view/components/custom_edit_button.dart';
 import 'package:flutter_midium_project/view/components/custom_follow_button.dart';
@@ -7,7 +9,6 @@ import 'package:flutter_midium_project/view/components/custom_post_my_view.dart'
 import 'package:flutter_midium_project/view/components/custom_post_visit_view.dart';
 import 'package:flutter_midium_project/view/components/custom_widget.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/main_holder_appbar.dart';
-import 'package:flutter_midium_project/view/pages/main_holder_page/profile_page/profile_page_view_model.dart';
 import 'package:flutter_midium_project/view/pages/other_profile_page/other_profile_page_view_model.dart';
 import 'package:flutter_midium_project/view/pages/profile_update_page/profile_update_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,7 +42,10 @@ class _TabPageState extends ConsumerState<OtherProfilePage>
         ref.watch(otherProfileViewModel(widget.userId));
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: mainHolderAppBar(context, "OtherProfile"),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
+        title: Text("OtherProfile"),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: NestedScrollView(
@@ -63,6 +67,7 @@ class _TabPageState extends ConsumerState<OtherProfilePage>
   }
 
   Widget _buildHeader(OtherProfileState profileState) {
+    PostController postCT = ref.read(postController);
     PostProfile? postProfile = profileState.postProfile;
     if (postProfile == null) {
       return const Center(
@@ -73,14 +78,14 @@ class _TabPageState extends ConsumerState<OtherProfilePage>
         children: [
           Row(
             children: [
-              const SizedBox(
-                width: 60,
-                height: 60,
-                child: CircleAvatar(
-                  radius: 16,
-                  backgroundImage: AssetImage("assets/images/cat1.jpg"),
-                ),
-              ),
+              SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: CircleAvatar(
+                    radius: 16,
+                    backgroundImage:
+                        NetworkImage("$host/${postProfile.profileImg}"),
+                  )),
               SizedBox(
                 width: 10,
               ),
@@ -98,8 +103,9 @@ class _TabPageState extends ConsumerState<OtherProfilePage>
                       ? const SizedBox()
                       : SizedBox(
                           width: 100,
-                          child:
-                              CustomFollowButton(() {}, postProfile.subscribe),
+                          child: CustomFollowButton(() {
+                            postCT.followUnFollow(postProfile.userId);
+                          }, postProfile.subscribe),
                         ),
                 ],
               ),
@@ -108,12 +114,6 @@ class _TabPageState extends ConsumerState<OtherProfilePage>
           SizedBox(
             height: 5,
           ),
-          CustomEditButton(() {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfileUpdatelPage()),
-            );
-          }, "Edit your Profile"),
         ],
       );
     }
@@ -155,8 +155,8 @@ class _TabPageState extends ConsumerState<OtherProfilePage>
           ListView.separated(
               itemBuilder: (context, index) {
                 return Container(
-                  child:
-                      (CustomPostVisitView(postProfile.myVisitListDto[index])),
+                  child: (CustomPostVisitView(
+                      postProfile.myVisitListDto[index], postProfile.nickname)),
                 );
               },
               separatorBuilder: (context, index) => Divider(),

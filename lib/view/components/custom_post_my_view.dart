@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_midium_project/core/host_info.dart';
 
 import 'package:flutter_midium_project/model/post_profile.dart';
 
 class CustomPostMyView extends StatelessWidget {
-  final MyPostListDto myPost;
+  final MyTListDto myPost;
   final String nickname;
   const CustomPostMyView(this.myPost, this.nickname, {Key? key})
       : super(key: key);
@@ -29,8 +30,8 @@ class CustomPostMyView extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 16,
-                      backgroundImage: NetworkImage(
-                          "http://192.168.0.2:8000/${myPost.postThumnail}"),
+                      backgroundImage:
+                          NetworkImage("$host/${myPost.postThumnail}"),
                     ),
                     SizedBox(width: 10),
                     Text(
