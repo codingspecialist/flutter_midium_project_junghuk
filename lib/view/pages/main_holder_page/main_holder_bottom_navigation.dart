@@ -21,6 +21,10 @@ Widget mainHolderBottomNavigation(
           label: " ",
         ),
         BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.search),
+          label: " ",
+        ),
+        BottomNavigationBarItem(
           icon: Icon(CupertinoIcons.profile_circled),
           label: " ",
         ),

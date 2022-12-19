@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/home_page/home_page.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/profile_page/profile_page.dart';
+import 'package:flutter_midium_project/view/pages/main_holder_page/search_page/search_page.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/your_library_page/your_library_page.dart';
 import 'package:logger/logger.dart';
 
@@ -27,7 +28,8 @@ class MainScreenState extends State<MainHolderPage> {
         children: [
           const HomePage(),
           loadedPages.contains(1) ? const YourLibraryPage() : Container(),
-          loadedPages.contains(2) ? const ProfilePage() : Container(),
+          loadedPages.contains(2) ? const SearchPage() : Container(),
+          loadedPages.contains(3) ? const ProfilePage() : Container(),
         ],
       ),
       floatingActionButton: _floatingActionButton(),

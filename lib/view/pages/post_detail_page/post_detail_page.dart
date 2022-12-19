@@ -22,13 +22,13 @@ class PostDetailPage extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: _buildBody(postDetailState),
+          child: _buildBody(postDetailState, ref),
         ),
       ),
     );
   }
 
-  Widget _buildBody(PostDetailState postDetailState) {
+  Widget _buildBody(PostDetailState postDetailState, WidgetRef ref) {
     PostDetail? postDetail = postDetailState.postDetail;
     if (postDetail == null) {
       return const Center(
@@ -65,7 +65,15 @@ class PostDetailPage extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Icon(CupertinoIcons.heart, size: 23, color: Colors.white),
+                      InkWell(
+                        onTap: () {
+                          ref
+                              .read(postDetailViewModel(postDetail.postId)
+                                  .notifier)
+                              .like();
+                        },
+                        child: buildLike(postDetailState),
+                      ),
                       const Flexible(
                         child: FractionallySizedBox(
                           widthFactor: 1,
@@ -153,6 +161,15 @@ class PostDetailPage extends ConsumerWidget {
           ),
         ],
       );
+    }
+  }
+
+  Widget buildLike(PostDetailState postDetailState) {
+    bool isLove = postDetailState.isLove;
+    if (isLove) {
+      return Icon(CupertinoIcons.heart_fill, size: 23, color: Colors.red);
+    } else {
+      return Icon(CupertinoIcons.heart, size: 23, color: Colors.white);
     }
   }
 }

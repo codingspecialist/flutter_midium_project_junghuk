@@ -1,23 +1,23 @@
 class Follow {
   Follow({
     required this.subscribeId,
-    required this.userId,
-    required this.usersId,
+    required this.fromUserId,
+    required this.toUserId,
   });
 
   int subscribeId;
-  int userId;
-  int usersId;
+  int fromUserId;
+  int toUserId;
 
   factory Follow.fromJson(Map<String, dynamic> json) => Follow(
         subscribeId: json["subscribeId"],
-        userId: json["userId"],
-        usersId: json["usersId"],
+        fromUserId: json["fromUserId"],
+        toUserId: json["toUserId"],
       );
 
   Map<String, dynamic> toJson() => {
         "subscribeId": subscribeId,
-        "userId": userId,
-        "usersId": usersId,
+        "fromUserId": fromUserId,
+        "toUserId": toUserId,
       };
 }

@@ -142,6 +142,19 @@ class PostService {
     return responseDto;
   }
 
+  Future<ResponseDto> fetchSearch(String value, String jwtToken) async {
+    Response response = await httpConnector
+        .get("/s/post/listForm?keyword=$value", jwtToken: jwtToken);
+    Logger().d(response.body);
+    ResponseDto responseDto = toResponseDto(response);
+    if (responseDto.code == 1) {
+      List<dynamic> mapList = responseDto.data; // dynamic
+      List<Post> postList = mapList.map((e) => Post.fromJson(e)).toList();
+      responseDto.data = postList;
+    }
+    return responseDto;
+  }
+
   // Future<ResponseDto> fetchDeletePost(int postId, String jwtToken) async {
   //   Response response =
   //       await httpConnector.delete("/post/$postId", jwtToken: jwtToken);

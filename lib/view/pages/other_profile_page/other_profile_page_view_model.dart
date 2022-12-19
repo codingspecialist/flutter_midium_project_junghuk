@@ -5,6 +5,7 @@ import 'package:flutter_midium_project/model/post_profile.dart';
 import 'package:flutter_midium_project/provider/auth_provider.dart';
 import 'package:flutter_midium_project/service/post_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class OtherProfileState {
   PostProfile? postProfile;
@@ -26,6 +27,7 @@ class OtherProfileViewModel extends StateNotifier<OtherProfileState> {
   int userId;
 
   Future<void> notifyViewModel() async {
+    Logger().d("other_profile notifyViewModel 실행됨");
     ResponseDto responseDto = await PostService().fetchPostProfileList(
         ref.read(authProvider).sessionUser.jwtToken, userId);
 

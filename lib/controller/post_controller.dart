@@ -11,6 +11,7 @@ import 'package:flutter_midium_project/service/post_service.dart';
 import 'package:flutter_midium_project/service/user_service.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/home_page/home_page_view_model.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/profile_page/profile_page_view_model.dart';
+import 'package:flutter_midium_project/view/pages/main_holder_page/search_page/search_page_view_model.dart';
 import 'package:flutter_midium_project/view/pages/main_holder_page/your_library_page/your_library_view_model.dart';
 import 'package:flutter_midium_project/view/pages/other_profile_page/other_profile_page_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,6 +28,7 @@ class PostController {
   PostController(this.ref);
 
   Future<void> followUnFollow(int userId) async {
+    Logger().d("follow userId : ${userId}");
     ResponseDto responseDto = await postService.fetchFollowUnFollow(
         ref.read(authProvider).sessionUser.jwtToken, userId);
     if (responseDto.code == 1) {
@@ -62,6 +64,14 @@ class PostController {
       ScaffoldMessenger.of(mContext!).showSnackBar(
         SnackBar(content: Text("로그인 실패 : ${responseDto.msg}")),
       );
+    }
+  }
+
+  Future<void> search(String value) async {
+    ResponseDto responseDto = await postService.fetchSearch(
+        value, ref.read(authProvider).sessionUser.jwtToken);
+    if (responseDto.code == 1) {
+      ref.read(searchViewModel.notifier).search(value);
     }
   }
 }
